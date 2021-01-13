@@ -29,7 +29,61 @@ Esto es un atajo para:
 `$ git shortlog`
 
 ---
-### 1. Stash
+### 1. El mejor amigo de un directorio vacío: `.gitkeep`
+
+Consideremos el siguiente experimento.
+```
+$ git init
+Initialized empty Git repository in C:/Users/hjcer/temp/.git/
+
+$ mkdir ejemplo1
+
+$ git status
+On branch master
+
+No commits yet
+
+# A pesar que el directorio ejemplo1 existe en el working tree, Git
+# no lo reconoce, negando la posibilidad de agregarlo al staging
+# area y almacenarlo en un commit.
+nothing to commit (create/copy files and use "git add" to track)
+```
+`.git keep`, ¿Acaso un archivo de configuración, como `.gitignore` o `.gitconfig` ? \
+lamentablemente no, por lo que no tiene documentación oficial su uso; el prefijo git sugiere que es un archivo de configuración, cuando en realidad no lo es.
+
+Al ser confuso este archivo, en lugar de usar un `.gitkeep` se recomienda utilizar un readme.md explicando la razón de la necesidad de hacer tracking de tal carpeta
+
+---
+### 2. Ignorando archivos: `.gitignore`
+
+Para ignorar archivos se requiere un archivo de configuración `.gitignore`, el cual puede tener impacto global o sólo respecto a un repositorio. Los archivos a ignorar se seleccionan utilizando expresiones glob.
+
+Las expresiones glob sirven el propósito de representar archivos mediante wildcards (caracteres especiales), dado un sistema de archivos; mientras que las expresiones regulares representan cadenas de texto, dada una secuencia de caracteres.
+
+#### Notación para expresiones glob
+| Símbolo|       Explicación |
+| --- | --- |
+| * |	Representa cualquier número de caracteres, incluido ninguno, pero no una diagonal. |
+| ** |	Representa uno o más directorios, pero no el directorio actual (.) ni el padre (..). |
+| ? |	Representa un carácter. |
+| [abc] |	Representa cualquier carácter contenido en los corchetes. |
+| [a-z] |	Representa cualquier carácter contenido en el intervalo definido por los corchetes. Este intervalo es dependiente de la configuración regional. |
+
+Este archivo define los archivos que Git ignorará. **Archivos tracked no son afectados**. El archivo puede contener comentarios de una línea, los cuales inician con `#`. Para especificar archivos a ignorar, colocar un patrón glob por línea. Si se ignora un directorio, todos sus archivos y subdirectorios también son ignorados. Un repositorio puede tener más de un `.gitignore`, siendo sus patrones glob relativos a la ubicación del archivo.
+
+![img](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/images/ignore_1.png)
+
+Git permite definir un `.gitignore` de impacto global (afecta todos los repositorios del usuario con esta configuración). Primero es necesario crear el archivo manualmente, luego se indica su ubicación en la configuración global.
+
+`$ git config --global core.excludesFile <ruta-.gitignore>`
+
+#### Ignorar archivos tracked
+Para ignorar archivos tracked (añadidos al staging environment o existentes en algún commit) primero deben ser olvidados por Git, es decir, cambiar su estado a untracked. Para conseguir esto se utiliza el comando siguiente, donde `<archivo>` acepta expresiones glob.
+
+`$ git rm --cached <archivo>`
+
+---
+### 3. Stash
 
 Vamos a presentar un ejemplo simple de ramificar y fusionar, con un flujo de trabajo que se podría presentar en la realidad. Imagina los siguientes pasos:
 
@@ -51,13 +105,15 @@ Cuando se intenta cambiar de rama sin haber primero hecho commit de los cambios 
 Please commit your changes or stash them before you switch branches.
 Aborting`
 
-*Si el trabajo en la rama actual aún no está listo para ser persistido en un commit, la solución yace en el stashing. Para crear un stash, existen los comandos* `$ git stash`, `$ git stash push` y `$ git stash save`
+*Si el trabajo en la rama actual aún no está listo para ser persistido en un commit, la solución yace en el stashing. Para crear un stash, existen los comandos* `$ git stash`, `**$ git stash push**` y `$ git stash save`
+
+Al estar desacoplado de las ramas, los stashes pueden ser referidos en cualquier rama. La idea es poder limpiar tanto el working tree como el staging area pero no perder los cambios, almacenándolos en un commit. Esto para poder cambiar de rama aún si no está listo para realizar un commit o en caso que requiera ejecutar `git pull`. Los cambios de este commit pueden ser luego aplicados al trabajar en una rama distinta o en la misma rama.
 
 #### Comandos para la administración de los stashes
 
 `$ git stash list`  Para mostrar todos los stashes
 
-`$ git stash push [-u | -a][-m "mensaje"][<Archivos>]`
+`$ git stash push [-u | -a][-m "mensaje"][<Archivos>]` Crear un nuevo stash
 
 * (`-u`) Incluyendo archivos modificados y untracked.
 * (`-a`) Incluyendo archivos modificados, untracked e ignorados.
@@ -65,6 +121,6 @@ Aborting`
 
 🔍 Tip de Hernán. Recuperar stashes perdidos puede ser complicado, por ello recomiendo utilizar `$ git commit` incluso para cambios parciales si estos son muy significativos. Luego siempre es posible realizar un `$ git commit --amend` para terminar de componer el commit.
 
-###### Es posible cambiar de rama teniendo modificaciones uncommitted en el working tree si el cambio * no requiere deshacer * dichas modificaciones.
+##### Es posible cambiar de rama teniendo modificaciones uncommitted en el working tree si el cambio * no requiere deshacer * dichas modificaciones.
 
 
