@@ -123,4 +123,32 @@ Al estar desacoplado de las ramas, los stashes pueden ser referidos en cualquier
 
 ##### Es posible cambiar de rama teniendo modificaciones uncommitted en el working tree si el cambio * no requiere deshacer * dichas modificaciones.
 
+---
+### Examinando el staging area, working tree y repositorio
 
+
+##### Archivos ignorados untracked
+`$ git ls-files --others --ignored --exclude-standard`
+
+#### Archivos ignorados versionados
+`$ git ls-files --ignored --exclude-standard`
+
+#### Archivos untracked no ignorados
+`$ git ls-files --others --exclude-standard`
+
+#### Archivos untracked
+`$ git ls-files --others`
+
+### Archivos versionados por Git
+
+#### Archivos que existen en el repositorio de Git.
+`$ git ls-tree HEAD --name-only -r`
+
+#### Resumen de cambios realizados por un commit. Donde <commit> es cualquier referencia resoluble a un commit, p. ej.: HEAD.
+`$ git show <commit> --name-status --oneline`
+
+---
+
+`$ git cherry-pick` \
+`$ git reset` Sólo puede deshacer hacia atrás a partir de la punta de una rama. Sólo utilizar sobre commits que aún no han sido publicados (push) \
+`$ git revert` Revert permite deshacer los cambios introducidos por commits selectos (incluso commits no secuenciales o muy atrás en la historia)
