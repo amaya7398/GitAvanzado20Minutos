@@ -32,6 +32,7 @@ Esto es un atajo para:
 ### 1. El mejor amigo de un directorio vacío: `.gitkeep`
 
 Consideremos el siguiente experimento.
+
 ```
 $ git init
 Initialized empty Git repository in C:/Users/hjcer/temp/.git/
@@ -48,6 +49,7 @@ No commits yet
 # area y almacenarlo en un commit.
 nothing to commit (create/copy files and use "git add" to track)
 ```
+
 `.git keep`, ¿Acaso un archivo de configuración, como `.gitignore` o `.gitconfig` ? \
 lamentablemente no, por lo que no tiene documentación oficial su uso; el prefijo git sugiere que es un archivo de configuración, cuando en realidad no lo es.
 
@@ -102,10 +104,12 @@ En este momento, recibes una llamada avisándote de un problema crítico que has
 
 Cuando se intenta cambiar de rama sin haber primero hecho commit de los cambios del working tree, en ocasiones Git reporta un mensaje de error similar al siguiente:
 
-```error: Your local changes to the following files would be overwritten by checkout:
+```
+error: Your local changes to the following files would be overwritten by checkout:
         foo.txt
 Please commit your changes or stash them before you switch branches.
-Aborting```
+Aborting
+```
 
 *Si el trabajo en la rama actual aún no está listo para ser persistido en un commit, la solución yace en el stashing. Para crear un stash, existen los comandos* `$ git stash`, `**$ git stash push**` y `$ git stash save`
 
