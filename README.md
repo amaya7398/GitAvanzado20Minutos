@@ -80,7 +80,9 @@ Git permite definir un `.gitignore` de impacto global (afecta todos los reposito
 #### Ignorar archivos tracked
 Para ignorar archivos tracked (añadidos al staging environment o existentes en algún commit) primero deben ser olvidados por Git, es decir, cambiar su estado a untracked. Para conseguir esto se utiliza el comando siguiente, donde `<archivo>` acepta expresiones glob.
 
-`$ git rm --cached <archivo>`
+`$ git reset HEAD <archivo>`     Cuando los archivos están en el staging area \
+`$ git rm --cached <archivo>`    Quieres que el archivo permanezca en tu ordenador pero simplemente se borre del repostorio \
+`$ git rm -r --cached <archivo>` Para directorios
 
 ---
 ### 3. Stash
@@ -118,6 +120,14 @@ Al estar desacoplado de las ramas, los stashes pueden ser referidos en cualquier
 * (`-u`) Incluyendo archivos modificados y untracked.
 * (`-a`) Incluyendo archivos modificados, untracked e ignorados.
 * (`-m`) Agregar mensaje al stash. Es posible utilizar la misma bandera de mensaje de commit (`-m`) para etiquetar al stash con un mensaje.
+
+El Stash permanece en la pila \
+`$ git stash apply [stash@{<índice>}]`  Aplicar los cambios \
+`$ git stash pop [stash@{<índice>}]`    Eliminar de la pila\
+ Si un stash no es proporcionado, se utiliza el stash `stash@{0}` para ambos comandos.
+ 
+`$ git stash drop [stash@{<índice>}]` Eliminar un stash, sin aplicar los cambios \
+`$ git stash clear`                   Eliminar todos los stashes de la pila
 
 🔍 Tip de Hernán. Recuperar stashes perdidos puede ser complicado, por ello recomiendo utilizar `$ git commit` incluso para cambios parciales si estos son muy significativos. Luego siempre es posible realizar un `$ git commit --amend` para terminar de componer el commit.
 
