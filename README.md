@@ -141,22 +141,27 @@ Ejemplo añadido de la [presentación en vídeo](https://youtu.be/6wABvfgwhWs)
 
 Recapitulando: El problema estuvo porque ambas ramas apuntaban al mismo commit, que a su vez apunta al mismo snapshot
 Anteriormente teniamos esta estructura:
+
 ![img](recursos/TREEinicio.png)
 
 ###### Ahora partimos de esta estructura en `master` tenemos:
+
 ![img](recursos/treeMasterInicio.png)
 
 ###### Y en la rama2 `features` tenemos:
+
 ![img](recursos/treeFeaturesInicio.png)
 
 En esta rama se siguen creando más features, mientras en master se hacen merge y se crean nuevos `commits` y después se crea\
 otra rama, `testing` inicinado del último `commit` de master (diferente al "primero"),  la cual tiene esta estructura,.
+
 ![img](recursos/treeTestingInicio.png)
 
 Dado el ejemplo de arriba, estamos trabanjando en la rama `testing` tranquilamente\
 luego surge un error en la RAMA `feature`, que tenemos que resolver, pero en este momento\
 hemos estado trabajando en la RAMA `testing`, en los directorios `app` como también en el dir `testing`\
 y la estructura en la RAMA `testing`tiene la siguiente forma
+
 ![img](recursos/treeTestingTrabajando.png)
 
 Y tampoco hemos hecho `commit`!
