@@ -2,6 +2,8 @@
 Recopilación sobre administración avanzada en git.\
 Basado en el [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md) de [HerCerM](https://github.com/HerCerM)
 
+[Presentación en vídeo](https://youtu.be/6wABvfgwhWs)
+
 ### Algunos trick shots:
 
 `$ git status [-s | --short]` \
@@ -133,6 +135,57 @@ El Stash permanece en la pila \
 `$ git stash drop [stash@{<índice>}]` Eliminar un stash, sin aplicar los cambios \
 `$ git stash clear`                   Eliminar todos los stashes de la pila
 
+---
+
+Ejemplo añadido de la [presentación en vídeo](https://youtu.be/6wABvfgwhWs)
+
+Recapitulando: El problema estuvo porque ambas ramas apuntaban al mismo commit, que a su vez apunta al mismo snapshot
+Anteriormente teniamos esta estructura:
+![img](recursos/TREEinicio.png)
+
+###### Ahora partimos de esta estructura en `master` tenemos:
+![img](recursos/treeMasterInicio.png)
+
+###### Y en la rama2 `features` tenemos:
+![img](recursos/treeFeaturesInicio.png)
+
+En esta rama se siguen creando más features, mientras en master se hacen merge y se crean nuevos `commits` y después se crea\
+otra rama, `testing` inicinado del último `commit` de master (diferente al "primero"),  la cual tiene esta estructura,.
+![img](recursos/treeTestingInicio.png)
+
+Dado el ejemplo de arriba, estamos trabanjando en la rama `testing` tranquilamente\
+luego surge un error en la RAMA `feature`, que tenemos que resolver, pero en este momento\
+hemos estado trabajando en la RAMA `testing`, en los directorios `app` como también en el dir `testing`\
+y la estructura en la RAMA `testing`tiene la siguiente forma
+![img](recursos/treeTestingTrabajando.png)
+
+Y tampoco hemos hecho `commit`!
+
+Cuando nos aparezca el mensaje de fallo, ya que nos estamos moviendo sin antes hacer commit (y tampoco queremos hacerlo):
+
+```
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+```
+Usamos el comando:
+`git stash push -u -m "mensaje" .`
+y añadimos todos los documentos al stash (en lugar del "." podemos escoger los documentos que queramos añadir al stash)
+
+
+En este punto, puedes fácilmente cambiar de ramas y trabajar en otro lugar; tus cambios están guardados en tus archivos.\
+Para ver qué guardados rápidos (stash) has almacenado, usamos `git stash list` y obtendremos algo similar:
+![img](recursos/stashTesting0.png)
+
+también podemos incluir esta información en cualquier rama ...\
+procedemos a usar `$ git stash apply [stash@{<índice>}]`  estando en la RAMA `features`para aplicar los cambios
+y `$ git stash pop [stash@{<índice>}]` para eliminar el stash de la pila\
+recordando que si no hubiese un `[stash@{<índice>}]` indice, usaría el último añadido `[stash@{0}]`
+
+De esta forma tendremos en `features` los archivos untracked que teniamos en `testing`
+![img](recursos/stashTesting1Features.png)
+
+---
 🔍 Tip de Hernán. Recuperar stashes perdidos puede ser complicado, por ello recomiendo utilizar `$ git commit` incluso para cambios parciales si estos son muy significativos. Luego siempre es posible realizar un `$ git commit --amend` para terminar de componer el commit.
 
 ##### Es posible cambiar de rama teniendo modificaciones uncommitted en el working tree si el cambio * no requiere deshacer * dichas modificaciones.
