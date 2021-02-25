@@ -1,6 +1,6 @@
 # GitAvanzado20Minutos
 Recopilación sobre administración avanzada en git.\
-Basado en el [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md) de [HerCerM](https://github.com/HerCerM)
+Del [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md) de [HerCerM](https://github.com/HerCerM)
 
 [Presentación en vídeo](https://youtu.be/6wABvfgwhWs)
 
@@ -9,13 +9,13 @@ Basado en el [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/m
 `$ git status [-s | --short]` \
 `$ git commit -a -m "mensaje"`
 
-`$ git checkout -b [NewBranch]` \
-`Switched to a new branch`
+`$ git checkout -b [NuevaRama]` \
+`Cambio a una nueva branch (rama)`
 
 Esto es un atajo para:
 
-`$ git branch [NewBranch]`\
-`$ git checkout [NewBranch]`
+`$ git branch [NuevaRama]`\
+`$ git checkout [NuevaRama]`
 
 ---
 `$ git log [--all] [--oneline] [-<cantidad>] [--first-parent] [<commit>]`
@@ -55,7 +55,9 @@ nothing to commit (create/copy files and use "git add" to track)
 `.git keep`, ¿Acaso un archivo de configuración, como `.gitignore` o `.gitconfig` ? \
 lamentablemente no, por lo que no tiene documentación oficial su uso; el prefijo git sugiere que es un archivo de configuración, cuando en realidad no lo es.
 
-Al ser confuso este archivo, en lugar de usar un `.gitkeep` se recomienda utilizar un readme.md explicando la razón de la necesidad de hacer tracking de tal carpeta
+Al ser confuso este archivo, en lugar de usar un `.gitkeep` se recomienda utilizar un readme.md explicando la razón de la necesidad de hacer tracking de tal carpeta 
+
+> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#el-confuso-archivo-gitkeep-y-los-directorios-vac%C3%ADos) original
 
 ---
 ### 2. Ignorando archivos: `.gitignore`
@@ -81,8 +83,12 @@ Git permite definir un `.gitignore` de impacto global (afecta todos los reposito
 
 `$ git config --global core.excludesFile <ruta-.gitignore>`
 
+> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#notaci%C3%B3n-de-expresiones-glob) original
+
 #### Ignorar archivos tracked
-Para ignorar archivos tracked (añadidos al staging environment o existentes en algún commit) primero deben ser olvidados por Git, es decir, cambiar su estado a untracked. Para conseguir esto se utiliza el comando siguiente, donde `<archivo>` acepta expresiones glob.
+
+``Para ignorar archivos tracked (añadidos al staging environment o existentes en algún commit) primero deben ser olvidados por Git, es decir, cambiar su estado a untracked. Para conseguir esto se utiliza el comando siguiente, donde `<archivo>` acepta expresiones glob.
+``
 
 `$ git reset HEAD <archivo>`     Cuando los archivos están en el staging area \
 `$ git rm --cached <archivo>`    Quieres que el archivo permanezca en tu ordenador pero simplemente se borre del repostorio \
@@ -94,7 +100,7 @@ Para ignorar archivos tracked (añadidos al staging environment o existentes en 
 Vamos a presentar un ejemplo simple de ramificar y fusionar, con un flujo de trabajo que se podría presentar en la realidad. Imagina los siguientes pasos:
 
 1. Trabajas en un sitio web.
-2. Creas una rama para un nuevo tema sobre el que quieres desarrollar.
+2. Creas una rama para un nuevo feature sobre el que quieres desarrollar.
 3. Realizas cambios en esa rama.
 
 En este momento, recibes una llamada avisándote de un problema crítico que has de resolver. Y sigues los siguientes pasos:
@@ -119,7 +125,7 @@ Al estar desacoplado de las ramas, los stashes pueden ser referidos en cualquier
 
 #### Comandos para la administración de los stashes
 
-`$ git stash list`  Para mostrar todos los stashes
+`$ git stash list`  Mostrar el listado de stashes
 
 `$ git stash push [-u | -a][-m "mensaje"][<Archivos>]` Crear un nuevo stash
 
@@ -135,6 +141,7 @@ El Stash permanece en la pila \
 `$ git stash drop [stash@{<índice>}]` Eliminar un stash, sin aplicar los cambios \
 `$ git stash clear`                   Eliminar todos los stashes de la pila
 
+> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#stashing-para-evitar-commits-parciales) original
 ---
 
 Ejemplo añadido de la [presentación en vídeo](https://youtu.be/6wABvfgwhWs)
