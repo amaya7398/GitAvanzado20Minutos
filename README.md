@@ -32,6 +32,7 @@ Esto es un atajo para:
 
 ---
 ### 1. El mejor amigo de un directorio vacío: `.gitkeep`
+> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#el-confuso-archivo-gitkeep-y-los-directorios-vac%C3%ADos) original
 
 Consideremos el siguiente experimento.
 
@@ -57,10 +58,9 @@ lamentablemente no, por lo que no tiene documentación oficial su uso; el prefij
 
 Al ser confuso este archivo, en lugar de usar un `.gitkeep` se recomienda utilizar un readme.md explicando la razón de la necesidad de hacer tracking de tal carpeta 
 
-> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#el-confuso-archivo-gitkeep-y-los-directorios-vac%C3%ADos) original
-
 ---
 ### 2. Ignorando archivos: `.gitignore`
+> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#notaci%C3%B3n-de-expresiones-glob) original
 
 Para ignorar archivos se requiere un archivo de configuración `.gitignore`, el cual puede tener impacto global o sólo respecto a un repositorio. Los archivos a ignorar se seleccionan utilizando expresiones glob.
 
@@ -78,12 +78,11 @@ Las expresiones glob sirven el propósito de representar archivos mediante wildc
 Este archivo define los archivos que Git ignorará. **Archivos tracked no son afectados**. El archivo puede contener comentarios de una línea, los cuales inician con `#`. Para especificar archivos a ignorar, colocar un patrón glob por línea. Si se ignora un directorio, todos sus archivos y subdirectorios también son ignorados. Un repositorio puede tener más de un `.gitignore`, siendo sus patrones glob relativos a la ubicación del archivo.
 
 ![img](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/images/ignore_1.png)
+> imagen y tabla en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#notaci%C3%B3n-de-expresiones-glob) original
 
 Git permite definir un `.gitignore` de impacto global (afecta todos los repositorios del usuario con esta configuración). Primero es necesario crear el archivo manualmente, luego se indica su ubicación en la configuración global.
 
 `$ git config --global core.excludesFile <ruta-.gitignore>`
-
-> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#notaci%C3%B3n-de-expresiones-glob) original
 
 #### Ignorar archivos tracked
 
@@ -96,6 +95,7 @@ Git permite definir un `.gitignore` de impacto global (afecta todos los reposito
 
 ---
 ### 3. Stash
+> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#stashing-para-evitar-commits-parciales) original
 
 Vamos a presentar un ejemplo simple de ramificar y fusionar, con un flujo de trabajo que se podría presentar en la realidad. Imagina los siguientes pasos:
 
@@ -141,7 +141,6 @@ El Stash permanece en la pila \
 `$ git stash drop [stash@{<índice>}]` Eliminar un stash, sin aplicar los cambios \
 `$ git stash clear`                   Eliminar todos los stashes de la pila
 
-> Para mayor información, ver ejercicio en [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Parte2_Profundizando.md#stashing-para-evitar-commits-parciales) original
 ---
 
 Ejemplo añadido de la [presentación en vídeo](https://youtu.be/6wABvfgwhWs)
