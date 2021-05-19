@@ -7,15 +7,19 @@ Del [repositorio](https://github.com/HerCerM/ManualDefinitivoGit/blob/master/Par
 ### Algunos trick shots:
 
 `$ git status [-s | --short]` \
-`$ git commit -a -m "mensaje"`
+`$ git commit -a -m "mensaje"` => Agregar archivos modificados y commit al mismo tiempo
 
-`$ git checkout -b [NuevaRama]` \
-`Cambio a una nueva branch (rama)`
+`$ git checkout -b [NuevaRama]` <= Esto es un atajo \
+`Cambio a una nueva branch (rama)`\
+=> Para esto: \
+=> `$ git branch [NuevaRama]`\
+=> `$ git checkout [NuevaRama]`
 
-Esto es un atajo para:
+`$ git commit --amend` 👉 Cambiar mensaje de commit más reciente \
+`$ git push --force [Rama]` 👉 Forzar cambio en repositorio (si quieres cambiar el mensaje del commit más reciente c;)
 
-`$ git branch [NuevaRama]`\
-`$ git checkout [NuevaRama]`
+🚨 El empuje forzado, cambia el historial de tu repositorio. \
+🚨 Las personas que tienen clonado tu repositorio deberán arreglar manualmente el historial local
 
 ---
 `$ git log [--all] [--oneline] [-<cantidad>] [--first-parent] [<commit>]`
@@ -27,8 +31,8 @@ Esto es un atajo para:
 * (`--first-parent`) Recorre el árbol de commits sólo pasando por el primer padre. Esto es muy útil al revisar la historia de master, donde no se suele desear ver commits de ramas fusionadas.
 * (`<commit>`) Especificar una posición distinta a HEAD para iniciar el recorrido del árbol. Este argumento toma cualquier referencia resoluble a un commit, véase referencias absolutas y referencias relativas.
 
-`$ git log --oneline -5 --author [value]` \
-`$ git shortlog`
+`$ git log --oneline -5 --author [value]` 👉 Muestra los 5 logs más recientes del author [value], cada log en 1 línea\
+`$ git shortlog` 👉 Despliega todos los log, un parrafo por cada log
 
 ---
 ### 1. El mejor amigo de un directorio vacío: `.gitkeep`
